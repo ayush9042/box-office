@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 
-const Title = ({ title, subtitle}) => {
+const Title = ({ title, subtitle }) => {
   return (
     <div>
       <h1>{title}</h1>
