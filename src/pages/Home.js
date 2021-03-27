@@ -1,10 +1,12 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import ActorGrid from '../components/actor/ActorGrid';
+import CustomRadio from '../components/CustomRadio';
 import MainPageLayout from '../components/MainPageLayout'
 import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
 import { useLastQuery } from '../misc/custom-hooks';
+import { RadioInputsWrapper, SearchButtonWrapper, SearchInput } from './Home.styled';
 
 const Home = () => {
   const [ input, setInput ] = useLastQuery();
@@ -51,33 +53,36 @@ const Home = () => {
 
   return (
     <MainPageLayout>
-      <input type="text"
+      <SearchInput type="text"
       placeholder="Search for Something"
       onChange={onInputChange} value={input}
       onKeyDown={onKeyDown} />
-      <div>
-        <label htmlFor="shows-search">
-          Shows
-          <input 
-          id="shows-search"
-          type="radio"
-          value="shows"
-          checked={isShowSearch}
-          onChange={onRadioChange}  />
-        </label>
+      <RadioInputsWrapper>
+        <div>
 
-        <label htmlFor="actors-search">
-          Actors
-          <input 
-          id="actors-search"
-          type="radio"
-          value="people"
-          checked={!isShowSearch}
-          onChange={onRadioChange}  />
-        </label>
+          <CustomRadio 
+           label="Shows"
+           id="shows-search"
+           value="shows"
+           checked={isShowSearch}
+           onChange={onRadioChange}
+          />
+        </div>
 
-      </div>
-      <button type="button" onClick={onSearch}>Search</button>
+        <div>
+        <CustomRadio 
+           label="Actors"
+           id="actors-search"
+           value="people"
+           checked={!isShowSearch}
+           onChange={onRadioChange}
+          />
+        </div>
+
+      </RadioInputsWrapper>
+      <SearchButtonWrapper>
+        <button type="button" onClick={onSearch}>Search</button>
+      </SearchButtonWrapper>
       {renderResults()}
     </MainPageLayout>
   )
